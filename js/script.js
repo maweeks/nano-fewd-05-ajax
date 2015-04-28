@@ -35,6 +35,10 @@ function loadData() {
 	});
 
 	//wiki
+	var wikiRequestTimeout = setTimeout(function() {
+		$wikiElem.text("Failed to get wikipedia resources");
+	}, 8000);
+
 	var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + cityStr + '&format=json&callback=wikiCallback';
 	$.ajax({
 		url: wikiUrl,
@@ -47,6 +51,7 @@ function loadData() {
 				var url = 'http://en.wikipedia.org/wiki/' + wikiArticle;
 				$wikiElem.append('<li><a href="' + url + '">' + wikiArticle + '</a></li>');
 			}
+			clearTimeout(wikiRequestTimeout);
 		}
 	});
 
@@ -55,5 +60,5 @@ function loadData() {
 
 $('#form-container').submit(loadData);
 
-// 1600 pennsylvania ave
-// washington dc
+console.log('1600 pennsylvania ave');
+console.log('washington dc');
