@@ -22,7 +22,7 @@ function loadData() {
     $body.append('<img class="bgimg" src="' + streetviewUrl + '">');
 
     //NYT     
-    var nytimesUrl = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + cityStr + '&sort=newest&api-key=cb7683eb13d6ba9c195c961d1d78c71e:19:7141829';
+    var nytimesUrl = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + cityStr + '&sort=newest&api-key=cb7683eb13d6ba9c195c961d1d78c71e:19:71418291';
     $.getJSON(nytimesUrl, function (data) {
     	$nytHeaderElem.text('New York Times Articles About ' + cityStr);
     	var nytArticles = data.response.docs;
@@ -30,11 +30,9 @@ function loadData() {
 			var nytArticle = nytArticles[i];
 			$nytElem.append('<li class="article">' + '<a href="' + nytArticle.web_url + '">' + nytArticle.headline.main + '</a>' + '<p>' + nytArticle.snippet + '</p>' + '</li>');
 		}
+	}).error(nytimesUrl, function (data) {
+    	$nytHeaderElem.text('New York Times Articles Could Not Be Loaded');
 	});
-
-
-
-
 
     return false;
 };
@@ -43,7 +41,3 @@ $('#form-container').submit(loadData);
 
 // 1600 pennsylvania ave
 // washington dc
-
-
-//a
-//p
